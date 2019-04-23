@@ -1,16 +1,12 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-<<<<<<< HEAD
     <HelloWorld msg="Welcome to Your Vue.js App This is Sandy. Screw Dan." />
     <p>{{ message }}</p>
 
     <div>
       <button v-on:click="printresume()">Click to Print PDF</button>
     </div>
-=======
-    <HelloWorld msg="Welcome to Your Vue.js App This is Sandy. Screw Dan. Killing it" />
->>>>>>> e4159eb11f19e5ea19fa501fe6d9582f1e69d95d
   </div>
 </template>
 
@@ -38,6 +34,8 @@ export default {
       pdf.fromHTML(document.body);
 
       pdf.text("WE DID IT!", 10, 10);
+      const img = canvas.toDataURL("image/png");
+      doc.addImage(img, "JPEG", 20, 20);
       pdf.save("test.pdf");
     }
   }
