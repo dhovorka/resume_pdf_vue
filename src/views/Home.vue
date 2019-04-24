@@ -4,9 +4,7 @@
     <HelloWorld msg="Welcome to Your Vue.js App This is Sandy. Screw Dan." />
     <p>{{ message }}</p>
 
-    <div>
-      <button v-on:click="printresume()">Click to Print PDF</button>
-    </div>
+
   </div>
 </template>
 
@@ -25,19 +23,6 @@ export default {
       message: "Hello"
     };
   },
-  methods: {
-    printresume: function() {
-      var pdf = new jsPDF();
-      pdf.canvas.height = 72 * 11;
-      pdf.canvas.width = 72 * 8.5;
-
-      pdf.fromHTML(document.body);
-
-      pdf.text("WE DID IT!", 10, 10);
-      const img = canvas.toDataURL("image/png");
-      doc.addImage(img, "JPEG", 20, 20);
-      pdf.save("test.pdf");
-    }
-  }
+  methods: {}
 };
 </script>

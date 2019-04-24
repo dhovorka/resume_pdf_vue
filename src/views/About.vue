@@ -1,14 +1,16 @@
 <template>
   <div class="container">
-    <h1>All Photos</h1>
-    <div v-for="photo in photos">
-      <h2>{{ photo.name }}</h2>
-      <img v-bind:src="photo.url">
-      <p>Width: {{ photo.width }}</p>
-      <p>Height: {{ photo.height }}</p>
+    <button v-on:click="printresume()">Here is your resume</button>
+
+    <h1>All Resumes</h1>
+    <div v-for="resume in resumes">
+      <h2>{{ resume.name }}</h2>
+      <h2>{{ resume.title }}</h2>
+      <h2>{{ resume.department }}</h2>
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from "axios";
@@ -16,20 +18,30 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      photos: [
+      resumes: [
         {
-          name: "doggies",
-          url:
-            "https://static.scientificamerican.com/sciam/cache/file/D059BC4A-CCF3-4495-849ABBAFAED10456_source.jpg?w=590&h=800&526ED1E1-34FF-4472-B348B8B4769AB2A1"
+          name: "Jordan",
+          title: "Junior Buyer",
+          department: "Retail"
         }
       ]
     };
   },
   created: function() {
-    axios.get("/api/photos").then(response => {
-      this.photos = response.data;
+    axios.get("/api/resumes").then(response => {
+      this.resumes = response.data;
     });
   },
-  methods: {}
+  methods: {
+    printresume: function() {
+      var pdf = new jsPDF();
+      pdf.canvas.height = 72 * 11;
+      pdf.canvas.width = 72 * 8.5;
+      // pdf.setTextColor(0, 255, 0);
+
+      pdf.fromHTML(document.querySelector("div.container"));
+      pdf.save("test.pdf");
+    }
+  }
 };
 </script>
